@@ -1,0 +1,29 @@
+{
+  "name": "merkletreejs-multiproof-solidity",
+  "version": "1.0.0",
+  "description": "Verifying merkle multiproofs in solidity example",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "keccak256": "^1.0.0",
+    "merkletreejs": "^0.1.6"
+  },
+  "devDependencies": {
+    "truffle": "^5.1.26"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miguelmota/merkletreejs-multiproof-solidity.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/miguelmota/merkletreejs-multiproof-solidity/issues"
+  },
+  "homepage": "https://github.com/miguelmota/merkletreejs-multiproof-solidity#readme"
+}
