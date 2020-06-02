@@ -1,5 +1,5 @@
 const MerkleMultiProof = artifacts.require('MerkleMultiProof')
-const { MerkleTree } = require('../../merkletreejs')
+const { MerkleTree } = require('merkletreejs')
 const keccak256 = require('keccak256')
 
 contract('MerkleMultiProof', (accounts) => {
@@ -12,28 +12,31 @@ contract('MerkleMultiProof', (accounts) => {
   context('MerkleMultiProof', () => {
     describe('verifyMultiProof()', () => {
       it('should verify for valid merkle multiproof (example)', async () => {
-        const elements = ['a', 'b', 'c', 'd', 'e', 'f'].map(keccak256).sort(Buffer.compare)
-        const tree = new MerkleTree(elements, keccak256, { sort: true })
-        const leaves = ['b', 'f', 'd'].map(keccak256).sort(Buffer.compare)
-        const root = tree.getRoot()
-        const proof = tree.getMultiProof(leaves)
-        const proofFlags = tree.getProofFlags(leaves, proof)
+        const leaves = ['a', 'b', 'c', 'd', 'e', 'f'].map(keccak256).sort(Buffer.compare)
+        const tree = new MerkleTree(leaves, keccak256, { sort: true })
 
-        assert.equal(await contract.verifyMultiProof.call(root, leaves, proof, proofFlags), true)
+        const root = tree.getRoot()
+        const proofLeaves = ['b', 'f', 'd'].map(keccak256).sort(Buffer.compare)
+        const proof = tree.getMultiProof(proofLeaves)
+        const proofFlags = tree.getProofFlags(proofLeaves, proof)
+
+        const verified = await contract.verifyMultiProof.call(root, proofLeaves, proof, proofFlags)
+        assert.equal(verified, true)
       })
 
       it('should not verify for invalid merkle multiproof', async () => {
-        const elements = ['a', 'b', 'c', 'd', 'e', 'f'].map(keccak256).sort(Buffer.compare)
-        const tree = new MerkleTree(elements, keccak256, { sort: true })
-        const leaves = ['b', 'f', 'd'].map(keccak256).sort(Buffer.compare)
+        const leaves = ['a', 'b', 'c', 'd', 'e', 'f'].map(keccak256).sort(Buffer.compare)
+        const tree = new MerkleTree(leaves, keccak256, { sort: true })
+
         const root = tree.getRoot()
-        const proof = tree.getMultiProof(leaves)
-        const proofFlags = tree.getProofFlags(leaves, proof)
+        const proofLeaves = ['b', 'f', 'd'].map(keccak256).sort(Buffer.compare)
+        const proof = tree.getMultiProof(proofLeaves)
+        const proofFlags = tree.getProofFlags(proofLeaves, proof)
         proofFlags[proofFlags.length - 1] = !proofFlags[proofFlags.length - 1]
 
         let errMessage = ''
         try {
-          await contract.verifyMultiProof.call(root, leaves, proof, proofFlags)
+          await contract.verifyMultiProof.call(root, proofLeaves, proof, proofFlags)
         } catch (err) {
           errMessage = err.message
         }

@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "keccak256": "^1.0.0",
-    "merkletreejs": "^0.1.6"
+    "merkletreejs": "^0.2.0"
   },
   "devDependencies": {
     "truffle": "^5.1.26"
