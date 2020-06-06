@@ -1,6 +1,6 @@
 # MerkleTree.js MultiProof Solidity example
 
-> Verifying merkle multiproofs in solidity example
+> Example of generating multiproofs with [MerkleTree.js](https://github.com/miguelmota/merkletreejs) and verifying in a [Solidity](https://github.com/ethereum/solidity) smart contract.
 
 ## Example
 
@@ -9,6 +9,7 @@
 ```solidity
 pragma solidity >=0.5.0 <0.7.0;
 
+// @credit: https://github.com/status-im/account-contracts/blob/develop/contracts/cryptography/MerkleMultiProof.sol
 contract MerkleMultiProof {
     function calculateMultiMerkleRoot(
         bytes32[] memory leafs,
