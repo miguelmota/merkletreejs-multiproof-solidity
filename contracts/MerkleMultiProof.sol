@@ -11,7 +11,7 @@ contract MerkleMultiProof {
      * @param leafs out of order sequence of leafs and it's siblings
      * @param proofs out of order sequence of parent proofs
      * @param proofFlag flags for using or not proofs while hashing against hashes.
-     * @return merkle root of tree
+     * @return merkleRoot of tree
      */
     function calculateMultiMerkleRoot(
         bytes32[] memory leafs,
