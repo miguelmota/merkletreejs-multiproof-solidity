@@ -1,3 +1,5 @@
+#### NOTICE: The solidity code is unaudited and most likely broken as is. Do not use in production!
+
 # MerkleTree.js MultiProof Solidity example
 
 > Example of generating multiproofs with [MerkleTree.js](https://github.com/miguelmota/merkletreejs) and verifying in a [Solidity](https://github.com/ethereum/solidity) smart contract.
